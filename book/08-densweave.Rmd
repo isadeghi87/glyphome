@@ -53,7 +53,7 @@ dg <- densweave_density_grid(d$UMAP_1, d$UMAP_2, n = 100)
 ggplot() +
   geom_tile(data = dg, aes(x, y, fill = log10(density + 1e-6))) +
   scale_fill_viridis_c(option = "mako") +
-  coord_equal() + bioviz_theme_void() +
+  coord_equal() + glyphome_theme_void() +
   labs(title = "Density terrain")
 ```
 

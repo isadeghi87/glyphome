@@ -1,28 +1,25 @@
 --- 
-title: "bioviz: Advanced Bioinformatics Visualization Reference"
+title: "glyphome: Advanced Bioinformatics Visualization Tutorial and Reference"
 author: "Iman Sadeghi"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib]
-biblio-style: apalike
-link-citations: true
-description: "Reference book for the bioviz suite of advanced visualization modules for bioinformatics, in the style of the ComplexHeatmap reference."
-github-repo: isadeghi87/bioviz
-url: 'https://isadeghi.github.io/visualization_package/'
+description: "Complete tutorial and reference manual for the glyphome suite of advanced visualization modules for bioinformatics."
+github-repo: isadeghi87/glyphome
+url: 'https://isadeghi87.github.io/glyphome/'
 ---
 
 # Preface {-}
 
-`bioviz` is a suite of ten R visualization modules that address gaps in the
+`glyphome` is a suite of ten R visualization modules that address gaps in the
 conventional bioinformatics figure vocabulary. Each module is a focused,
 self-contained R package; together they share a common visual language and a
 single render-all entry point.
 
-This book is a long-form reference modelled on
-[Zuguang Gu's ComplexHeatmap reference](https://jokergoo.github.io/ComplexHeatmap-reference/book/).
-Like that book, it is organized so that any chapter can be read on its own,
-while the cumulative reading establishes the design philosophy of the suite.
+This manual is both a tutorial and a reference. It is organized so that each
+chapter can be read independently, while a sequential reading builds from
+installation, to visual grammar, to module-specific workflows, to final
+publication-grade figure assembly.
 
 ## What this book covers {-}
 
@@ -37,13 +34,24 @@ while the cumulative reading establishes the design philosophy of the suite.
 - **Part V — Building publication figures.** Composite layouts, refinement
   loops, and the figure-composition QC checklist.
 
+## Tutorial path {-}
+
+New users should read chapters in this order:
+
+1. Installation and quick start.
+2. Architecture and shared visual grammar.
+3. The one or two modules that match their data type.
+4. Composite-figure assembly before exporting publication panels.
+
+Advanced users can jump directly to module chapters and copy the API examples.
+
 ## How to read this book {-}
 
 Code blocks in each chapter are runnable in an R session that has sourced the
 shared utilities and the relevant module:
 
 ```{r eval=FALSE}
-source("R/bioviz-common.R")
+source("R/glyphome-common.R")
 source("packages/densweave/R/densweave.R")
 densweave_plot_atlas()
 ```
@@ -51,7 +59,7 @@ densweave_plot_atlas()
 Every chapter ends with a *Design notes* section explaining what makes the
 module novel and where it should not be used.
 
-## Citing bioviz {-}
+## Citing glyphome {-}
 
-If you use `bioviz` in published work, please cite the GitHub repository
+If you use `glyphome` in published work, please cite the GitHub repository
 until a methods preprint is available.

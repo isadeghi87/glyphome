@@ -1,4 +1,4 @@
-# Extending bioviz {#extending}
+# Extending glyphome {#extending}
 
 The suite is intentionally open: adding an eleventh module should not
 require touching any of the first ten.
@@ -28,7 +28,7 @@ Required public functions:
 
 ## Registration
 
-Add the module to `bioviz_modules()` in `R/bioviz-common.R`:
+Add the module to `glyphome_modules()` in `R/glyphome-common.R`:
 
 ```{r eval=FALSE}
 data.frame(
@@ -39,15 +39,15 @@ data.frame(
 )
 ```
 
-After registration, `bioviz_render_all()` will pick up the new module
+After registration, `glyphome_render_all()` will pick up the new module
 automatically, the master generator script will render it, and a chapter
 slot can be added to `book/_bookdown.yml`.
 
 ## Style requirements
 
-- Use `bioviz_theme()` or `bioviz_theme_void()` rather than redefining
+- Use `glyphome_theme()` or `glyphome_theme_void()` rather than redefining
   fonts and grids.
-- Save with `bioviz_save()` and an explicit `role`.
+- Save with `glyphome_save()` and an explicit `role`.
 - Use `patchwork::wrap_plots()` for composition.
 - Document every public function with a roxygen2 block.
 

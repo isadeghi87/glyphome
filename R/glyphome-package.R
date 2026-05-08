@@ -1,6 +1,6 @@
-#' bioviz: Advanced Bioinformatics Visualization Suite
+#' glyphome: Advanced Bioinformatics Visualization Suite
 #'
-#' bioviz is a meta-package that bundles ten focused visualization modules,
+#' glyphome is a meta-package that bundles ten focused visualization modules,
 #' each addressing a distinct gap in the conventional bioinformatics figure
 #' vocabulary. Modules are independently usable but share a common visual
 #' language (theme, size table, save helper) defined in this package.
@@ -18,17 +18,16 @@
 #'
 #' @section Quick start:
 #' \preformatted{
-#'   library(bioviz)
-#'   bioviz_load_all()
-#'   bioviz_render_all("figures")
+#'   library(glyphome)
+#'   glyphome_load_all()
+#'   glyphome_render_all("figures")
 #' }
 #'
 #' @section Tutorial:
-#' A long-form tutorial in the style of the ComplexHeatmap reference book
-#' is provided under \code{book/}. Build with
-#' \code{bookdown::render_book("book/")}.
+#' A complete bookdown tutorial and reference manual is provided under
+#' \code{book/}. Build with \code{bookdown::render_book("book/")}.
 #'
 #' @docType package
-#' @name bioviz-package
-#' @aliases bioviz
+#' @name glyphome-package
+#' @aliases glyphome
 NULL

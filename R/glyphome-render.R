@@ -1,22 +1,22 @@
-## bioviz: render-all driver
+## glyphome: render-all driver
 ##
 ## Top-level entry point that loads every module and renders the curated
 ## figure set (one to three panels per module). Used by both the master
 ## generator script and the tutorial book.
 
-#' Render the full bioviz figure set
+#' Render the full glyphome figure set
 #'
-#' Loads every module in [bioviz_modules()] and runs its `<module>_save_demo()`
+#' Loads every module in [glyphome_modules()] and runs its `<module>_save_demo()`
 #' entry point, writing PNGs to `output_dir`.
 #'
 #' @param output_dir directory to write figures into; created if needed.
 #' @param base_dir   workspace root containing `packages/`
 #' @param modules    optional character vector to render only a subset
 #' @return invisible character vector of module names that succeeded.
-bioviz_render_all <- function(output_dir,
+glyphome_render_all <- function(output_dir,
                               base_dir = getwd(),
                               modules = NULL) {
-  reg <- bioviz_modules()
+  reg <- glyphome_modules()
   if (!is.null(modules)) reg <- reg[reg$module %in% modules, , drop = FALSE]
   dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 

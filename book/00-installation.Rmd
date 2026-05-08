@@ -1,0 +1,155 @@
+# Installation and quick start {#installation}
+
+This chapter gives a complete, reproducible path from installation to the first
+rendered figures. The rest of the manual assumes this setup.
+
+## Installation options
+
+There are three supported installation modes:
+
+1. Install the **umbrella package** only (`glyphome`) for shared theme helpers
+   and the render-all driver.
+2. Install the umbrella plus all ten module packages.
+3. Install only one module package, such as `densweave` or `survivora`.
+
+### System requirements
+
+`glyphome` is intentionally lightweight, but several graphics dependencies
+compile native code. On Linux, install these once:
+
+```{bash eval=FALSE}
+sudo apt-get update
+sudo apt-get install -y build-essential libxml2-dev libcurl4-openssl-dev \
+  libssl-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev \
+  libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+```
+
+On macOS, install Xcode Command Line Tools:
+
+```{bash eval=FALSE}
+xcode-select --install
+```
+
+On Windows, install the matching Rtools release from CRAN.
+
+### Install from GitHub
+
+```{r eval=FALSE}
+install.packages("remotes")
+remotes::install_github("isadeghi87/glyphome")
+```
+
+Then install all ten modules:
+
+```{r eval=FALSE}
+modules <- c(
+  "uncertainr", "provtrace", "scalefusion", "counterpath", "intercapsule",
+  "densweave", "clinladder", "survivora", "cohortprism", "riskweave"
+)
+
+for (m in modules) {
+  remotes::install_github("isadeghi87/glyphome", subdir = file.path("packages", m))
+}
+```
+
+### Install only one module
+
+```{r eval=FALSE}
+remotes::install_github("isadeghi87/glyphome", subdir = "packages/densweave")
+library(densweave)
+densweave_plot_atlas()
+```
+
+This is recommended when you only need one grammar family and want to keep the
+runtime environment minimal.
+
+## Quick start from a clone
+
+Clone the repository and render all figures:
+
+```{bash eval=FALSE}
+git clone https://github.com/isadeghi87/glyphome.git
+cd glyphome
+Rscript scripts/generate_all_figures.R
+```
+
+The script writes the curated PNG set to `figures/`. To render only a subset:
+
+```{bash eval=FALSE}
+Rscript scripts/generate_all_figures.R --module densweave survivora
+```
+
+## Quick start inside R
+
+```{r eval=FALSE}
+library(glyphome)
+
+glyphome_load_all()            # source every module into the session
+glyphome_render_all("figures") # render the curated figure set
+```
+
+A single module can be sourced directly during development:
+
+```{r eval=FALSE}
+source("R/glyphome-common.R")
+source("packages/densweave/R/densweave.R")
+
+densweave_plot_atlas()
+```
+
+## Common workflow
+
+The recommended workflow is:
+
+1. Generate or load a tidy analysis table.
+2. Convert it to a module-specific data structure if needed.
+3. Call the module plot constructor.
+4. Apply shared theme or adjust module parameters.
+5. Save with role-aware sizing.
+6. Assemble final composites only after panel-level QC.
+
+```{r eval=FALSE}
+source("R/glyphome-common.R")
+source("packages/riskweave/R/riskweave.R")
+
+p <- riskweave_plot_frontier()
+glyphome_save(p, "figures/risk_frontier.png", role = "primary")
+```
+
+## Building this tutorial
+
+```{r eval=FALSE}
+install.packages("bookdown")
+bookdown::render_book("book/")
+browseURL("book/_book/index.html")
+```
+
+The rendered HTML is a local artifact and is not required for using the package.
+
+## Troubleshooting
+
+### `there is no package called 'ggnewscale'`
+
+Install CRAN dependencies explicitly:
+
+```{r eval=FALSE}
+install.packages(c("ggplot2", "patchwork", "dplyr", "tidyr", "scales",
+                   "MASS", "ggraph", "igraph", "ggnewscale", "bookdown"))
+```
+
+### GitHub installation fails over SSH
+
+Use HTTPS instead:
+
+```{bash eval=FALSE}
+git clone https://github.com/isadeghi87/glyphome.git
+```
+
+### Figures render but text is too small
+
+Use a larger base theme or role size:
+
+```{r eval=FALSE}
+p + glyphome_theme(base_size = 13)
+glyphome_save(p, "large_panel.png", role = "hero")
+```

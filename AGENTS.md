@@ -1,23 +1,22 @@
-# AGENTS.md — visualization_package (bioviz v0.2)
+# AGENTS.md — visualization_package (glyphome v0.2)
 
 ## Project Overview
-The workspace is the **bioviz** umbrella R package + ten stand-alone
+The workspace is the **glyphome** umbrella R package + ten stand-alone
 visualization sub-packages for publication-grade bioinformatics figures.
 Each sub-package targets a specific gap in the conventional figure vocabulary
 (uncertainty, provenance, scale, dynamics, interaction, topology, clinical
 decision support).
 
 ## Architecture
-- `DESCRIPTION` / `NAMESPACE` / `R/` — bioviz umbrella package (shared theme,
-  size table, `bioviz_render_all()` driver, module registry).
+- `DESCRIPTION` / `NAMESPACE` / `R/` — glyphome umbrella package (shared theme,
+  size table, `glyphome_render_all()` driver, module registry).
 - `packages/<module>/` — ten stand-alone R packages, each with its own
   `DESCRIPTION`, auto-generated `NAMESPACE`, and a single monolithic
   `R/<module>.R` containing palettes, data generators, plot constructors,
   and a `<module>_save_demo()` entry point.
 - `scripts/generate_all_figures.R` — CLI driver (supports `--module`).
 - `figures/` — 26 curated PNGs (4 redundant figures removed in v0.2).
-- `book/` — bookdown reference manual (15 chapters), modeled on the
-  ComplexHeatmap reference.
+- `book/` — complete bookdown tutorial and reference manual (16 chapters).
 
 ## Figure Generation Skill Pack
 Palettes and visualization patterns from this package have been abstracted into the

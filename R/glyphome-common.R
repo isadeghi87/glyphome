@@ -1,4 +1,4 @@
-## bioviz-common: shared theme, palette helpers, and figure-saving utilities
+## glyphome-common: shared theme, palette helpers, and figure-saving utilities
 ##
 ## All ten visualization modules in this workspace consume the same base
 ## theme and figure-saving conventions defined here. Sourcing this file gives
@@ -6,13 +6,13 @@
 ## duplicating ggplot theme code in every package.
 ##
 ## Usage:
-##   source("R/bioviz-common.R")
-##   p + bioviz_theme()
-##   bioviz_save(p, "fig.png", role = "primary")
+##   source("R/glyphome-common.R")
+##   p + glyphome_theme()
+##   glyphome_save(p, "fig.png", role = "primary")
 
 # ── Base theme ───────────────────────────────────────────────────────────────
 
-#' bioviz base theme
+#' glyphome base theme
 #'
 #' A minimal, publication-grade ggplot2 theme used by every module in the
 #' workspace. Scales sensibly for composite figures.
@@ -20,7 +20,7 @@
 #' @param base_size base font size in pt (default 10)
 #' @param base_family font family (default "sans")
 #' @return a ggplot2 theme object
-bioviz_theme <- function(base_size = 10, base_family = "sans") {
+glyphome_theme <- function(base_size = 10, base_family = "sans") {
   ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       plot.title         = ggplot2::element_text(face = "bold", size = base_size + 2),
@@ -38,7 +38,7 @@ bioviz_theme <- function(base_size = 10, base_family = "sans") {
 }
 
 #' Void theme variant for image-like panels (spatial maps, embeddings)
-bioviz_theme_void <- function(base_size = 10) {
+glyphome_theme_void <- function(base_size = 10) {
   ggplot2::theme_void(base_size = base_size) +
     ggplot2::theme(
       plot.title    = ggplot2::element_text(face = "bold", size = base_size + 2),
@@ -49,7 +49,7 @@ bioviz_theme_void <- function(base_size = 10) {
 # ── Figure-size table by panel role ─────────────────────────────────────────
 # Aligned with the figure-composition standards: hero panels get more area,
 # auxiliary panels get less.
-bioviz_size <- function(role = c("primary", "hero", "supporting", "auxiliary")) {
+glyphome_size <- function(role = c("primary", "hero", "supporting", "auxiliary")) {
   role <- match.arg(role)
   switch(role,
     hero       = list(width = 16, height = 12),
@@ -66,8 +66,8 @@ bioviz_size <- function(role = c("primary", "hero", "supporting", "auxiliary")) 
 #' @param role one of "hero", "primary", "supporting", "auxiliary"
 #' @param dpi output resolution (default 300)
 #' @param ... passed to ggplot2::ggsave
-bioviz_save <- function(plot, path, role = "primary", dpi = 300, ...) {
-  s <- bioviz_size(role)
+glyphome_save <- function(plot, path, role = "primary", dpi = 300, ...) {
+  s <- glyphome_size(role)
   ggplot2::ggsave(path, plot = plot,
                   width = s$width, height = s$height,
                   dpi = dpi, bg = "white", ...)
@@ -78,7 +78,7 @@ bioviz_save <- function(plot, path, role = "primary", dpi = 300, ...) {
 # Single source of truth for which modules exist, what role they play, and
 # which figures they generate. Used by the master figure generator and the
 # tutorial book.
-bioviz_modules <- function() {
+glyphome_modules <- function() {
   data.frame(
     module = c("uncertainr","provtrace","scalefusion","counterpath","intercapsule",
                "densweave","clinladder","survivora","cohortprism","riskweave"),
@@ -104,8 +104,8 @@ bioviz_modules <- function() {
 #' Source all module files into the calling environment
 #'
 #' @param base_dir workspace root (default: detected from getwd)
-bioviz_load_all <- function(base_dir = getwd()) {
-  pkgs <- bioviz_modules()$module
+glyphome_load_all <- function(base_dir = getwd()) {
+  pkgs <- glyphome_modules()$module
   for (pkg in pkgs) {
     src <- file.path(base_dir, "packages", pkg, "R", paste0(pkg, ".R"))
     if (file.exists(src)) source(src, chdir = TRUE)

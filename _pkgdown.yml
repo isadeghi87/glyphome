@@ -1,15 +1,15 @@
-url: https://isadeghi.github.io/visualization_package/
+url: https://isadeghi87.github.io/glyphome/
 
 template:
   bootstrap: 5
   bootswatch: flatly
 
 navbar:
-  title: bioviz
+  title: glyphome
   left:
     - icon: fa-home
       href: index.html
-    - text: Reference book
+    - text: Tutorial
       href: book/index.html
     - text: Modules
       menu:
@@ -37,15 +37,15 @@ navbar:
       href: reference/index.html
   right:
     - icon: fa-github
-      href: https://github.com/isadeghi87/bioviz
+      href: https://github.com/isadeghi87/glyphome
 
 reference:
   - title: Shared utilities
     contents:
-      - bioviz_theme
-      - bioviz_theme_void
-      - bioviz_size
-      - bioviz_save
-      - bioviz_modules
-      - bioviz_load_all
-      - bioviz_render_all
+      - glyphome_theme
+      - glyphome_theme_void
+      - glyphome_size
+      - glyphome_save
+      - glyphome_modules
+      - glyphome_load_all
+      - glyphome_render_all
