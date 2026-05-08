@@ -1,0 +1,51 @@
+url: https://isadeghi.github.io/visualization_package/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  title: bioviz
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: Reference book
+      href: book/index.html
+    - text: Modules
+      menu:
+        - text: uncertainr
+          href: book/uncertainr.html
+        - text: provtrace
+          href: book/provtrace.html
+        - text: scalefusion
+          href: book/scalefusion.html
+        - text: counterpath
+          href: book/counterpath.html
+        - text: intercapsule
+          href: book/intercapsule.html
+        - text: densweave
+          href: book/densweave.html
+        - text: clinladder
+          href: book/clinladder.html
+        - text: survivora
+          href: book/survivora.html
+        - text: cohortprism
+          href: book/cohortprism.html
+        - text: riskweave
+          href: book/riskweave.html
+    - text: Function reference
+      href: reference/index.html
+  right:
+    - icon: fa-github
+      href: https://github.com/isadeghi87/bioviz
+
+reference:
+  - title: Shared utilities
+    contents:
+      - bioviz_theme
+      - bioviz_theme_void
+      - bioviz_size
+      - bioviz_save
+      - bioviz_modules
+      - bioviz_load_all
+      - bioviz_render_all

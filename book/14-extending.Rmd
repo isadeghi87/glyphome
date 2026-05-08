@@ -1,0 +1,73 @@
+# Extending bioviz {#extending}
+
+The suite is intentionally open: adding an eleventh module should not
+require touching any of the first ten.
+
+## Anatomy of a module
+
+A module is a directory under `packages/` containing:
+
+```
+packages/<module>/
+├── DESCRIPTION         # standard R package metadata
+├── NAMESPACE           # auto-generated from <module>_* exports
+└── R/
+    └── <module>.R      # palettes, data generators, plot fns, save fn
+```
+
+Required public functions:
+
+- `<module>_*_data()` — one or more data generators (synthetic for
+  development, real loaders for production).
+- `<module>_plot_*()` — one or more plot constructors that return a
+  ggplot or patchwork object.
+- `<module>_plot_demo()` — convenience entry point returning the
+  module's headline figure.
+- `<module>_save_demo(output_dir)` — writes the curated figure set to
+  `output_dir`.
+
+## Registration
+
+Add the module to `bioviz_modules()` in `R/bioviz-common.R`:
+
+```{r eval=FALSE}
+data.frame(
+  module    = c(..., "yourmodule"),
+  family    = c(..., "your-family"),
+  one_liner = c(..., "what your module does in one sentence"),
+  n_figures = c(..., 2L)
+)
+```
+
+After registration, `bioviz_render_all()` will pick up the new module
+automatically, the master generator script will render it, and a chapter
+slot can be added to `book/_bookdown.yml`.
+
+## Style requirements
+
+- Use `bioviz_theme()` or `bioviz_theme_void()` rather than redefining
+  fonts and grids.
+- Save with `bioviz_save()` and an explicit `role`.
+- Use `patchwork::wrap_plots()` for composition.
+- Document every public function with a roxygen2 block.
+
+## Don'ts
+
+- Do not introduce a new categorical palette without checking that it
+  reads against the existing module palettes when assembled into a
+  manuscript figure.
+- Do not depend on heavy bioconductor packages for core rendering. If a
+  Bioconductor object is needed, accept the tidy data frame derived from
+  it as input.
+- Do not bypass the role-based size table to "make a panel bigger".
+  Promote the role instead.
+
+## Submitting a module
+
+A new module is accepted into the suite when:
+
+1. Its visual grammar fills a gap not covered by the existing ten.
+2. It passes the figure-composition QC checklist (chapter
+   \@ref(composing-figures)).
+3. It comes with a chapter draft for this book.
+4. Its `_save_demo()` runs cleanly via the master generator.

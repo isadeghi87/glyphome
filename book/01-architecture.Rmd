@@ -1,0 +1,91 @@
+# (PART) Foundations {-}
+
+# The bioviz architecture {#architecture}
+
+## Goals
+
+`bioviz` was designed under three constraints:
+
+1. **One coherent visual language.** Every module shares the same base theme,
+   the same panel-size table, and the same figure-saving conventions. A
+   reader should be able to recognise a `bioviz` figure without being told.
+2. **Module independence.** Each module is a stand-alone R package under
+   `packages/`. A user who only needs `survivora` can install just that
+   package without pulling the rest of the suite.
+3. **Composability over breadth.** The suite intentionally avoids re-implementing
+   conventional plots (heatmap, volcano, KM curve, OncoPrint). Each module
+   targets a specific *gap* in the conventional vocabulary.
+
+## Layout
+
+```
+visualization_package/
+├── DESCRIPTION              # umbrella bioviz meta-package
+├── NAMESPACE
+├── R/
+│   ├── bioviz-package.R     # package-level docs
+│   ├── bioviz-common.R      # shared theme, sizes, save helpers
+│   └── bioviz-render.R      # bioviz_render_all()
+├── packages/
+│   ├── uncertainr/          # one R package per module
+│   ├── provtrace/
+│   ├── scalefusion/
+│   ├── counterpath/
+│   ├── intercapsule/
+│   ├── densweave/
+│   ├── clinladder/
+│   ├── survivora/
+│   ├── cohortprism/
+│   └── riskweave/
+├── scripts/
+│   └── generate_all_figures.R
+├── figures/                 # rendered demo PNGs (26 panels)
+└── book/                    # this reference manual (bookdown)
+```
+
+## Module registry
+
+The single source of truth for "what is in the suite" is the
+`bioviz_modules()` data frame:
+
+```{r eval=FALSE}
+source("R/bioviz-common.R")
+bioviz_modules()
+#>      module      family                                      one_liner   n_figures
+#> 1   uncertainr   uncertainty Uncertainty as a first-class visual element       3
+#> 2   provtrace    provenance  Provenance and pipeline dependency...          2
+#> 3   scalefusion  scale       Cross-scale semantic continuity...             2
+#> ...
+```
+
+Both the master generator (`scripts/generate_all_figures.R`) and the table
+of contents of this book are driven by this registry.
+
+## Render pipeline
+
+The end-to-end rendering pipeline is small enough to fit on one slide:
+
+```
+bioviz_render_all(output_dir)
+   └── for module m in bioviz_modules():
+         ├── source packages/m/R/m.R           (in an isolated env)
+         ├── call m_save_demo(output_dir)      (per-module entry point)
+         └── log success / failure
+```
+
+Per-module entry points always have the signature
+`<module>_save_demo(output_dir)` and are responsible for writing the module's
+curated figure set. This convention is what allows the suite to be rendered,
+indexed, and documented uniformly.
+
+## Versioning and dependencies
+
+All ten modules are released together as `bioviz 0.2.0`. They share a tight
+dependency set (`ggplot2`, `patchwork`, `dplyr`, `tidyr`, `scales`, `MASS`,
+`ggraph`, `igraph`, `ggnewscale`, `grid`); no module pulls in additional
+heavy dependencies.
+
+```{r eval=FALSE}
+# install.packages("remotes")
+# remotes::install_github("isadeghi/visualization_package", subdir = "packages/densweave")
+```

@@ -1,0 +1,23 @@
+book_filename: "bioviz"
+language:
+  ui:
+    chapter_name: "Chapter "
+delete_merged_file: true
+rmd_files: [
+  "index.Rmd",
+  "01-architecture.Rmd",
+  "02-visual-grammar.Rmd",
+  "03-uncertainr.Rmd",
+  "04-provtrace.Rmd",
+  "05-scalefusion.Rmd",
+  "06-counterpath.Rmd",
+  "07-intercapsule.Rmd",
+  "08-densweave.Rmd",
+  "09-clinladder.Rmd",
+  "10-survivora.Rmd",
+  "11-cohortprism.Rmd",
+  "12-riskweave.Rmd",
+  "13-composing-figures.Rmd",
+  "14-extending.Rmd"
+]
+output_dir: "_book"

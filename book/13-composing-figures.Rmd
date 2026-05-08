@@ -1,0 +1,68 @@
+# (PART) Building publication figures {-}
+
+# Composing publication-grade figures {#composing-figures}
+
+This chapter assembles the rules from the figure-composition standards in
+a runnable form. The goal is a figure that survives peer review without
+revision rounds.
+
+## Workflow
+
+1. **State the figure message** in one sentence.
+2. **Inventory the candidate panels** (data is already analysed; you are
+   choosing among finished panels).
+3. **Assign metadata** to each panel (role, density, label burden).
+4. **Decide the layout grid** with hero panels at 25–40 % of total area.
+5. **Render and assemble** with `patchwork`.
+6. **Run QC** (checklist below).
+7. **Refine the weakest panel** before declaring the figure final.
+
+## Layout patterns
+
+| Pattern              | Use when                                                   |
+|----------------------|------------------------------------------------------------|
+| Hero + 2 supporting  | One headline result + 2 confirmatory views                 |
+| 2×2 weighted grid    | Four roughly equal panels with one slightly larger        |
+| Image-led            | A spatial map dominates; analytical panels orbit it        |
+| Ladder               | Sequential evidence rungs (e.g. `clinladder`)              |
+
+The figure-composition standards explicitly forbid "uniform grid"
+layouts when information density varies across panels.
+
+## QC checklist
+
+::: qc-checklist
+- [ ] Is all essential text readable at final figure size?
+- [ ] Does any unimportant panel dominate?
+- [ ] Is any dense panel too small to interpret?
+- [ ] Are fonts, line weights, and titles consistent across panels?
+- [ ] Does the figure tell a story when scanned left-to-right, top-to-bottom?
+- [ ] Are all colour scales perceptually uniform and clearly labelled?
+- [ ] Is the rendering quality uniform (no blurry panels)?
+:::
+
+A figure that fails any item is not a final figure.
+
+## Refinement loop
+
+The first assembled composite is always a draft. Identify and fix:
+
+- the weakest panel,
+- the most oversized panel,
+- the most undersized panel,
+- any redundant panel,
+- any narrative-order problem.
+
+Stopping at the first pass is the single most common figure failure.
+
+## When to split
+
+Split into two figures or move panels to supplement when:
+
+- multiple hero panels compete for space,
+- panel count exceeds what a reader can take in,
+- essential labels become unreadable,
+- the narrative fragments,
+- the figure tries to answer more than one question.
+
+A crowded figure is not a strong figure.

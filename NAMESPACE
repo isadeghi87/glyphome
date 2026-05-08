@@ -1,0 +1,16 @@
+# bioviz NAMESPACE
+# Generated; lists shared utilities. Per-module exports are loaded from
+# packages/<module>/NAMESPACE when sub-packages are installed.
+
+export(bioviz_theme)
+export(bioviz_theme_void)
+export(bioviz_size)
+export(bioviz_save)
+export(bioviz_modules)
+export(bioviz_load_all)
+export(bioviz_render_all)
+
+importFrom(ggplot2, ggsave)
+importFrom(ggplot2, theme_minimal)
+importFrom(ggplot2, theme_void)
+importFrom(stats, quantile)

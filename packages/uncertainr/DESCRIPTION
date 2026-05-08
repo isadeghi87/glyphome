@@ -1,0 +1,33 @@
+Package: uncertainr
+Type: Package
+Title: Uncertainty-Native Bioinformatics Visualization
+Version: 0.2.0
+Authors@R: c(
+    person("Iman", "Sadeghi", email = "i.sadeghi@example.com", role = c("aut", "cre"))
+  )
+Description: Treats statistical uncertainty as a first-class visual element rather than a side annotation. Renders measurement noise, model uncertainty, and annotation ambiguity as decomposed channels in atomic certainty-card glyphs.
+    Part of the bioviz suite of ten complementary visualization modules
+    for advanced bioinformatics analysis and publication-grade figures.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    ggplot2,
+    patchwork,
+    dplyr,
+    tidyr,
+    scales,
+    grid,
+    stats,
+    MASS,
+    ggraph,
+    igraph,
+    ggnewscale
+Suggests:
+    knitr,
+    rmarkdown,
+    bookdown,
+    testthat (>= 3.0.0)
+RoxygenNote: 7.3.2
+URL: https://github.com/isadeghi87/bioviz
+BugReports: https://github.com/isadeghi87/bioviz/issues

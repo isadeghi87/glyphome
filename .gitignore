@@ -1,0 +1,38 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+.Rapp.history
+
+# Bookdown / pkgdown build outputs
+book/_book/
+book/_bookdown_files/
+book/libs/
+docs/
+*.html
+!book/**/*.html
+
+# LaTeX intermediates from PDF book builds
+*.aux
+*.log
+*.toc
+*.out
+*.tex
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Build artifacts
+*.tar.gz
+*.tgz
+*.Rcheck/

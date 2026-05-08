@@ -1,0 +1,33 @@
+.book .book-body .page-wrapper .page-inner section.normal h1,
+.book .book-body .page-wrapper .page-inner section.normal h2,
+.book .book-body .page-wrapper .page-inner section.normal h3 {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.module-card {
+  border-left: 4px solid #2a9d8f;
+  padding: 0.6em 1em;
+  margin: 1em 0;
+  background: #f8f9fa;
+}
+
+.design-notes {
+  background: #fff8e1;
+  border-left: 4px solid #e9c46a;
+  padding: 0.6em 1em;
+  margin: 1.2em 0;
+  font-size: 0.95em;
+}
+
+.qc-checklist {
+  background: #eef5ff;
+  border-left: 4px solid #264653;
+  padding: 0.6em 1em;
+  margin: 1.2em 0;
+}
+
+img {
+  max-width: 100%;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+}

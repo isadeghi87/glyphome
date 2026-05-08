@@ -1,0 +1,98 @@
+# The shared visual grammar {#visual-grammar}
+
+This chapter is the analogue of *Single heatmap* in the ComplexHeatmap
+reference: it explains the building blocks that every later chapter assumes.
+
+## Theme
+
+`bioviz_theme()` is a minimal ggplot2 theme tuned for composite figures:
+
+```{r eval=FALSE}
+library(ggplot2)
+source("R/bioviz-common.R")
+
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  bioviz_theme(base_size = 10) +
+  labs(title = "Title in bold", subtitle = "Subtitle in muted grey")
+```
+
+Key choices:
+
+- Bold title, muted subtitle, captions on the left.
+- Minor grid removed; major grid in `#e9ecef` at hairline weight.
+- Strip text bold to anchor faceted panels.
+- Legend titles bold, key size compact.
+
+A void variant `bioviz_theme_void()` is used for spatial maps and
+embeddings where axes are meaningless.
+
+## Role-based panel sizing
+
+Every panel in the suite is assigned a *role*. The role drives the
+dimensions of the saved PNG:
+
+| Role        | Width × Height (in) | Used for                                         |
+|-------------|---------------------|--------------------------------------------------|
+| hero        | 16 × 12             | Headline composite (e.g. `survivora` landscape)  |
+| primary     | 13 × 10             | Module main figures                              |
+| supporting  | 10 × 8              | Side panels, single-axis summaries               |
+| auxiliary   | 8 × 6               | Diagnostic plots                                 |
+
+```{r eval=FALSE}
+bioviz_save(p, "figures/my_figure.png", role = "hero")
+```
+
+This is the implementation of the figure-composition rule that
+*"consistency does not mean equal panel size."* Information density and
+interpretive importance dictate area; the role label makes that decision
+explicit and reproducible.
+
+## Palettes
+
+Each module owns a domain-tuned categorical palette named `<module>_*_pal()`
+or `<module>_*_palette()`. The cell-type palette in `densweave_ct_pal()` is
+the canonical 30-colour atlas palette and is intentionally consistent with
+`uncertainr_celltype_palette()` so that figures from different modules read
+together when assembled into a manuscript.
+
+```{r eval=FALSE}
+source("packages/densweave/R/densweave.R")
+densweave_ct_pal()
+```
+
+Continuous scales follow domain convention: `viridis::mako` for density,
+`viridis::magma` for expression intensity, `gradient2(blue/white/red)` for
+signed deltas, and `OrRd`/`YlOrRd` for hazard or risk.
+
+## Saving conventions
+
+PNG is the default for the rendered figure set because it is what
+manuscript review processes expect. `bioviz_save()` writes at 300 dpi with
+white background; vector formats are available via `ggplot2::ggsave()` for
+final composition in Illustrator or Inkscape.
+
+## Composite figures
+
+All composite figures use **patchwork**. The pattern is:
+
+```{r eval=FALSE}
+library(patchwork)
+
+(p1 | p2 | p3) /
+  (p4 + plot_layout(widths = c(2, 1))) +
+  plot_annotation(
+    title = "Module: figure title",
+    subtitle = "One-line message of the figure"
+  ) &
+  bioviz_theme()
+```
+
+The `&` operator applies the theme to every panel in the patchwork; this is
+how visual consistency is enforced across panels with different geom types.
+
+::: design-notes
+**Design notes.** A composite is not a grid. The role-based size table
+should be applied even within one PNG file: hero panel ~25–40 % of total
+area, auxiliary panels ≤ 12 %. See chapter \@ref(composing-figures).
+:::
